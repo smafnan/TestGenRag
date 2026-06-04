@@ -1,0 +1,30 @@
+# Render blueprint: deploys the single container (API + UI) from the root
+# Dockerfile. Connect this repo at https://dashboard.render.com/blueprints.
+#
+# NOTE: Render's free web service has 512 MB RAM, which is tight for local
+# sentence-transformers embeddings. Either keep EMBEDDINGS_PROVIDER=huggingface
+# and use a paid instance, or switch to a hosted embeddings provider.
+# Hugging Face Spaces (Docker, 16 GB RAM free) is the easier home for this app
+# — see the README.
+
+services:
+  - type: web
+    name: testgenrag
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: LLM_PROVIDER
+        value: nvidia_deepseek          # hosted + free; Ollama can't run here
+      - key: NVIDIA_API_KEY
+        sync: false                     # set this secret in the dashboard
+      - key: NVIDIA_MODEL
+        value: deepseek-ai/deepseek-v3
+      - key: EMBEDDINGS_PROVIDER
+        value: huggingface
+      - key: PDF_EXTRACTOR
+        value: pdfplumber
+      - key: RERANK_METHOD
+        value: mmr
+      - key: CORS_ORIGINS
+        value: "*"

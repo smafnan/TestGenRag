@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Env / secrets
+.env
+*.local
+
+# Vector index & local DB
+faiss_index/
+*.db
+*.sqlite3
+
+# Node / SvelteKit
+node_modules/
+.svelte-kit/
+frontend/build/
+dist/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp

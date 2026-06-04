@@ -1,0 +1,21 @@
+# Minimal dependencies to run the test suite (CI uses this for a fast, reliable
+# run). The full runtime stack is in requirements.txt; the tests stub the model
+# layer, so heavy/optional deps (torch, sentence-transformers, ollama, redis,
+# psycopg, jose) are not needed here.
+fastapi
+uvicorn[standard]
+python-multipart
+python-dotenv
+pydantic
+langgraph
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+faiss-cpu
+pypdf
+pdfplumber
+boto3
+SQLAlchemy
+httpx
+pytest

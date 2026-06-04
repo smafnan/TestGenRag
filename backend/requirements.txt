@@ -1,0 +1,37 @@
+# ── Web framework ─────────────────────────────────────────────────────────────
+fastapi
+uvicorn[standard]
+python-multipart
+python-dotenv
+pydantic
+
+# ── Agent / RAG ───────────────────────────────────────────────────────────────
+langgraph
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+faiss-cpu
+pypdf
+pdfplumber                 # advanced, layout/table-aware PDF extraction
+
+# ── LLM providers (import-gated; only the selected provider is loaded) ──────────
+langchain-anthropic
+langchain-openai            # also used for NVIDIA NIM (OpenAI-compatible endpoint)
+langchain-aws
+langchain-ollama
+
+# ── Embeddings (default: free local sentence-transformers) ──────────────────────
+langchain-huggingface
+sentence-transformers
+
+# ── Storage / cache / auth (all optional at runtime; safe to install) ───────────
+boto3                       # S3 raw-file storage
+redis                       # response cache (falls back to in-memory)
+SQLAlchemy                  # approved-test-case persistence
+psycopg[binary]             # PostgreSQL driver (SQLite used if no DATABASE_URL)
+python-jose[cryptography]   # JWT verification for Cognito / Okta-OIDC
+
+# ── Optional: richest structure-aware extraction (heavy, pulls ML models) ───────
+# Uncomment to enable PDF_EXTRACTOR=docling
+# docling

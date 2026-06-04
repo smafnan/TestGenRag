@@ -1,0 +1,37 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7860:7860"
+    env_file:
+      - ./backend/.env
+    environment:
+      # Point at the bundled services when you uncomment them below.
+      # REDIS_URL: redis://redis:6379/0
+      # DATABASE_URL: postgresql+psycopg://testgen:testgen@postgres:5432/testgenrag
+      PORT: 7860
+    volumes:
+      - faiss_data:/app/backend/faiss_index
+    # depends_on: [redis, postgres]
+
+  # ── Optional cache. Uncomment + set REDIS_URL above to enable. ──────────────
+  # redis:
+  #   image: redis:7-alpine
+  #   ports: ["6379:6379"]
+
+  # ── Optional persistence. Uncomment + set DATABASE_URL above to enable. ─────
+  # postgres:
+  #   image: postgres:16-alpine
+  #   environment:
+  #     POSTGRES_USER: testgen
+  #     POSTGRES_PASSWORD: testgen
+  #     POSTGRES_DB: testgenrag
+  #   ports: ["5432:5432"]
+  #   volumes:
+  #     - pg_data:/var/lib/postgresql/data
+
+volumes:
+  faiss_data:
+  # pg_data:
