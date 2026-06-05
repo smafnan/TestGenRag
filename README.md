@@ -2,9 +2,8 @@
 
 # ⚗ TestGenRAG
 
-**An agentic RAG assistant that reads your technical documents, then either drafts citation-backed test cases or answers questions about them with a human approval step and a guardrail that refuses to answer from the wrong document.**
+**An agentic RAG assistant that reads your technical documents, then either drafts citation-backed test cases or answers questions about them, with a human approval step and a guardrail that refuses to answer from the wrong document.**
 
-[![CI](https://github.com/smafnan/TestGenRag/actions/workflows/ci.yml/badge.svg)](https://github.com/smafnan/TestGenRag/actions/workflows/ci.yml)
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Hugging_Face_Spaces-ffce00?logo=huggingface&logoColor=black)](https://afnansadiq-testgenrag.hf.space/app)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/)
@@ -100,7 +99,7 @@ flowchart TD
     J -->|"🔁 no · widen the search"| R
 ```
 
-- **HyDE** rewrites the requirement into a hypothetical specification paragraph, which matches manual wording far better than the raw question, so retrieval is sharper.
+- **HyDE** generates a hypothetical answer document from the requirement and embeds that for retrieval, matching the target document's wording far better than the raw question, so retrieval is sharper.
 - **Retrieve** runs query selection, FAISS similarity search, and re-ranking.
 - **Draft** produces structured cases using *only* the retrieved context.
 - **Ground check** is the judge; on failure the loop widens `k` and retries (capped).
@@ -124,7 +123,7 @@ flowchart TD
 ## 🧭 Using the app (step by step)
 
 1. **Get a free key.** Sign up at [build.nvidia.com](https://build.nvidia.com) (no credit card) and copy your `nvapi-...` key.
-2. **Paste the key** into the field at the top of the app and **pick a model** (Llama 3.1 8B is a good, fast default).
+2. **Paste the key** into the field at the top of the app and **pick a model** (Mistral is a good, fast default).
 3. **Upload a PDF** (a requirements spec, a manual, a lab report, anything). It is extracted, chunked, embedded, and indexed.
 4. Type your requirement or question and choose an action:
    - **▶ Generate test cases** for a requirement you want verified.
@@ -186,7 +185,8 @@ ollama pull mistral
 
 # 1. Backend
 cd backend
-python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\activate
+python -m venv .venv && source .venv/bin/activate     # macOS/Linux
+# Windows: python -m venv .venv; .venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env                                  # defaults are fine, no keys needed
 uvicorn app.main:app --reload --port 8000             # API docs at http://localhost:8000/docs
@@ -251,4 +251,4 @@ The analysis feature reports what a document **says** and how values compare to 
 
 ## 📄 License
 
-MIT — see [`LICENSE`](LICENSE). Use it freely.
+MIT. See [`LICENSE`](LICENSE) for details.
