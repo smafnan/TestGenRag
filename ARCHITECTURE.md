@@ -30,7 +30,7 @@ flowchart TD
 each page into overlapping ~1000-character chunks, embeds every chunk into a
 384-dimension vector, and stores the vectors in a FAISS index on disk. The page
 number travels with each chunk as metadata, which is what later lets a test case
-cite "p.3."
+cite "p.3." 
 
 **Generate test cases.** The agent rewrites the requirement into a hypothetical
 spec paragraph (HyDE), searches FAISS for relevant chunks, drafts test cases
