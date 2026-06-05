@@ -27,7 +27,7 @@ sentence-transformers embeddings, and you get one public URL. The repo's root
 `Dockerfile` already builds the UI and serves it with the API.
 
 1. **Create the Space**
-   - <https://huggingface.co/new-space> → name it → **SDK: Docker** → **Blank** → Create.
+   - <https://huggingface.co/new-space> → name it → **SDK: Docker** → **Blank** → Create
 
 2. **Push the code** (from the project root):
    ```bash
