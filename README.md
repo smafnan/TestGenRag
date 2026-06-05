@@ -2,7 +2,7 @@
 
 # ⚗ TestGenRAG
 
-**An agentic RAG assistant that reads your technical documents, then either drafts citation-backed test cases or answers questions about them — with a human approval step and a guardrail that refuses to answer from the wrong document.**
+**An agentic RAG assistant that reads your technical documents, then either drafts citation-backed test cases or answers questions about them with a human approval step and a guardrail that refuses to answer from the wrong document.**
 
 [![CI](https://github.com/smafnan/TestGenRag/actions/workflows/ci.yml/badge.svg)](https://github.com/smafnan/TestGenRag/actions/workflows/ci.yml)
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Hugging_Face_Spaces-ffce00?logo=huggingface&logoColor=black)](https://afnansadiq-testgenrag.hf.space/app)
