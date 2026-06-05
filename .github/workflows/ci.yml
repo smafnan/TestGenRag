@@ -45,3 +45,5 @@ jobs:
         run: npm run check
       - name: Build static site
         run: BASE_PATH=/app npm run build
+
+        
