@@ -1,14 +1,4 @@
-# ── Stage 1: build the SvelteKit frontend as a static SPA ─────────────────────
-FROM node:20-slim AS frontend
-WORKDIR /fe
-COPY frontend/package*.json ./
-RUN npm install
-COPY frontend/ ./
-# Mount the UI under /app so it shares one origin with the API.
-ENV BASE_PATH=/app
-RUN npm run build
-
-# ── Stage 2: Python backend that also serves the built frontend ───────────────
+# ── Single stage: Python backend that serves the HTML frontend ─────────────────
 FROM python:3.12-slim
 WORKDIR /app/backend
 
@@ -21,8 +11,10 @@ COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY backend/app ./app
-# Bring in the compiled frontend so FastAPI can serve it at /app.
-COPY --from=frontend /fe/build /app/frontend/build
+
+# Place the HTML design as the frontend index, served by FastAPI at /app.
+RUN mkdir -p /app/frontend/build
+COPY "TestGenRag Design/TestGen RAG Redesign.html" /app/frontend/build/index.html
 
 EXPOSE 7860
 # $PORT is provided by hosts like Render; default 7860 suits Hugging Face Spaces.

@@ -7,10 +7,9 @@
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Hugging_Face_Spaces-ffce00?logo=huggingface&logoColor=black)](https://afnansadiq-testgenrag.hf.space/app)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/)
-[![Node](https://img.shields.io/badge/node-18+-green.svg)](https://nodejs.org/)
 
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
-![SvelteKit](https://img.shields.io/badge/SvelteKit-FF3E00?logo=svelte&logoColor=white)
+![HTML5](https://img.shields.io/badge/Frontend-HTML5%2FVanilla_JS-E34F26?logo=html5&logoColor=white)
 ![LangGraph](https://img.shields.io/badge/LangGraph-1C3C3C?logo=langchain&logoColor=white)
 ![FAISS](https://img.shields.io/badge/FAISS-vector_search-4B8BBE)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
