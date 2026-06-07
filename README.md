@@ -14,6 +14,7 @@
 ![LangGraph](https://img.shields.io/badge/LangGraph-1C3C3C?logo=langchain&logoColor=white)
 ![FAISS](https://img.shields.io/badge/FAISS-vector_search-4B8BBE)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+[![CI](https://github.com/smafnan/TestGenRag/actions/workflows/ci.yml/badge.svg)](https://github.com/smafnan/TestGenRag/actions/workflows/ci.yml)
 
 **[▶ Try the live demo](https://afnansadiq-testgenrag.hf.space/app)** · [Architecture](ARCHITECTURE.md) · [Deployment guide](DEPLOY.md)
 
