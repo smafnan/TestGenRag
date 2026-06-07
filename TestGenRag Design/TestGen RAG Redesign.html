@@ -1298,7 +1298,7 @@ html[data-theme="win98"] textarea{cursor:text !important}
       </button>
       <button class="btn btn-ghost" onclick="dlCsv()"><span>Export for test tools (.csv)</span></button>
     </div>
-    <p style="font-size:.71rem;color:var(--mute);margin-top:.65rem">All approved cases with steps, expected results, and source citations — ready to attach to a ticket or import into a test manager.</p>
+    <p style="font-size:.71rem;color:var(--mute);margin-top:.65rem">Download anytime — no approval required. The file includes your approved cases, or all generated cases if none are signed yet, each with steps, expected results, and source citations — ready to attach to a ticket or import into a test manager.</p>
 </section>
 
 </main>
@@ -1413,11 +1413,20 @@ const cdot = document.getElementById('cdot');
 const cring = document.getElementById('cring');
 let mx=0,my=0,rx=0,ry=0;
 if(window.matchMedia('(pointer:fine)').matches){
+  let glowQueued=false;
   document.addEventListener('mousemove',e=>{
     mx=e.clientX; my=e.clientY;
     cdot.style.left=mx+'px'; cdot.style.top=my+'px';
-    document.documentElement.style.setProperty('--mx',mx+'px');
-    document.documentElement.style.setProperty('--my',my+'px');
+    // The mouse-glow is a full-viewport radial gradient; updating its position on
+    // every mousemove forces a costly repaint. Batch it to one update per frame.
+    if(!glowQueued){
+      glowQueued=true;
+      requestAnimationFrame(()=>{
+        document.documentElement.style.setProperty('--mx',mx+'px');
+        document.documentElement.style.setProperty('--my',my+'px');
+        glowQueued=false;
+      });
+    }
   });
   (function loop(){
     rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
@@ -1688,11 +1697,13 @@ function renderCases(cases){
       </div>`;
     list.appendChild(el);
   });
+  // Export/download is available as soon as test cases exist — no approval needed.
+  // (The summary still shows how many of N are approved, and updates as you sign.)
+  if(cases.length)showExp(cases);
 }
 function updateProg(cases){
   const s=cases.filter(t=>t.signed).length;
   document.getElementById('tc-prog').textContent=`${s}/${cases.length} approved`;
-  if(s===cases.length&&cases.length>0)showExp(cases);
 }
 async function sign(i){
   const tc=currentCases[i];
@@ -1936,7 +1947,6 @@ document.addEventListener('click',e=>{
 });
 
 let clockTick=null;
-let w98Observer=null;
 function startClock(){
   const tick=()=>{
     const c=document.getElementById('w98-clock');
@@ -1954,16 +1964,13 @@ function setTheme(theme){
     if(b) b.classList.toggle('active',t===theme);
   });
   if(theme==='win98'){
+    // The Win98 sections are static elements (only toggled via display), so their
+    // title bars persist once injected — a single pass is enough. (A body-wide
+    // MutationObserver here used to re-run on every DOM change and made the whole
+    // app sluggish, since Win98 is the default theme.)
     injectTitleBars();
     startClock();
-    if(w98Observer) w98Observer.disconnect();
-    w98Observer=new MutationObserver(()=>{
-      if(document.documentElement.getAttribute('data-theme')==='win98')
-        injectTitleBars();
-    });
-    w98Observer.observe(document.body,{childList:true,subtree:true});
   } else {
-    if(w98Observer){w98Observer.disconnect();w98Observer=null;}
     removeTitleBars();
     stopClock();
     document.getElementById('w98-switcher').classList.remove('open');
