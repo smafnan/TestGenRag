@@ -48,6 +48,26 @@ It is **model-agnostic** (Llama, Mistral, Claude, GPT, or fully local Ollama) an
 
 ---
 
+## 📸 The interface
+
+A single, self-contained web app (HTML + vanilla JS, no build step) with **three switchable themes** — same pipeline and API behind each. The app is **live now** at **[afnansadiq-testgenrag.hf.space/app](https://afnansadiq-testgenrag.hf.space/app)**.
+
+<div align="center">
+
+**Modern (dark) theme** — the default clean look
+
+![TestGenRAG modern dark interface: NVIDIA key + model picker, Step 01 ingest, Step 02 requirement](docs/screenshots/modern.png)
+
+**Windows 98 mode** — a retro theme, draggable windows and all
+
+![TestGenRAG Windows 98 themed interface with classic window chrome and taskbar](docs/screenshots/win98.png)
+
+</div>
+
+> A light theme and a live "tweaks" panel are included too. Switch themes from the toggle in the corner of the [live demo](https://afnansadiq-testgenrag.hf.space/app).
+
+---
+
 ## ✨ Key features
 
 | | Feature | What it does |
@@ -70,7 +90,7 @@ Every heavy or external integration (Redis, PostgreSQL, S3, auth, hosted LLMs) i
 
 ### The big picture
 
-Two flows share one FastAPI backend and one FAISS index. The SvelteKit UI talks to the same-origin API.
+Two flows share one FastAPI backend and one FAISS index. The browser UI (a self-contained HTML / vanilla-JS app) talks to the same-origin API.
 
 ```mermaid
 flowchart LR
@@ -148,7 +168,7 @@ flowchart TD
 
 | Layer | Technologies |
 |---|---|
-| **Frontend** | SvelteKit · TypeScript · responsive single-page UI (static-adapter build, served by the API) |
+| **Frontend** | Self-contained HTML + vanilla JS (no build step) · responsive single-page UI · three themes (Windows 98 / dark / light) · served directly by the API at `/app` |
 | **Backend / AI** | Python · FastAPI · LangChain · LangGraph · RAG (HyDE, query selection, re-ranking, LLM-as-judge) · FAISS |
 | **PDF & data** | PyPDF · PDFPlumber · Docling · dynamic page classification |
 | **Models** | NVIDIA NIM (Llama, Mistral, Nemotron...) · Anthropic Claude · OpenAI · AWS Bedrock · Ollama (local) · sentence-transformers embeddings |
@@ -161,9 +181,11 @@ flowchart TD
 
 ```text
 testgenrag/
-├── Dockerfile              # multi-stage: builds the UI, then serves API + UI on one port
+├── Dockerfile              # single-stage: serves the API + HTML UI on one port (7860)
 ├── docker-compose.yml      # app (+ optional redis / postgres)
 ├── render.yaml             # one-click Render deploy
+├── TestGenRag Design/      # the live UI: self-contained HTML (+ screenshots)
+├── docs/screenshots/       # interface screenshots used in this README
 ├── backend/
 │   ├── requirements.txt
 │   ├── .env.example
@@ -180,14 +202,14 @@ testgenrag/
 │       ├── database.py     # PostgreSQL persistence (SQLite fallback)
 │       ├── auth.py         # Cognito / Okta-OIDC JWT (disabled by default)
 │       └── aws.py          # S3 raw-file storage (no-op if unset)
-└── frontend/               # SvelteKit + TypeScript SPA
+└── frontend/               # legacy SvelteKit SPA (kept for reference; not deployed)
 ```
 
 ---
 
 ## 🚀 Run locally (free, offline)
 
-**Prerequisites:** Python 3.11+, Node 18+, and [Ollama](https://ollama.com).
+**Prerequisites:** Python 3.11+ and [Ollama](https://ollama.com). No Node / build step — the UI is a single HTML file the API serves directly.
 
 ```bash
 # 0. One-time: pull a local model
@@ -199,15 +221,16 @@ python -m venv .venv && source .venv/bin/activate     # macOS/Linux
 # Windows: python -m venv .venv; .venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env                                  # defaults are fine, no keys needed
-uvicorn app.main:app --reload --port 8000             # API docs at http://localhost:8000/docs
 
-# 2. Frontend (new terminal)
-cd frontend
-npm install
-npm run dev                                           # open http://localhost:5173
+# 2. Serve the UI from the same origin as the API (mirrors the Docker build)
+mkdir -p ../frontend/build
+cp "../TestGenRag Design/TestGen RAG Redesign.html" ../frontend/build/index.html
+
+# 3. Run it
+uvicorn app.main:app --reload --port 8000             # UI: http://localhost:8000/app · API docs: /docs
 ```
 
-Upload a PDF, type a requirement, and click **Generate test cases** or ask a question and click **Analyze & answer**.
+Open **http://localhost:8000/app**, upload a PDF, type a requirement, and click **Generate test cases** — or ask a question and click **Analyze & answer**.
 
 > First run downloads the embedding model (~90 MB) once. With Ollama, the LLM runs entirely on your machine and nothing leaves it.
 
