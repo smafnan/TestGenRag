@@ -50,7 +50,7 @@ It is **model-agnostic** (Llama, Mistral, Claude, GPT, or fully local Ollama) an
 
 ## 📸 The interface
 
-A single, self-contained web app (HTML + vanilla JS, no build step) with **four switchable themes** (Windows 98, Dark, Light, Futuristic) — same pipeline and API behind each. The app is **live now** at **[afnansadiq-testgenrag.hf.space/app](https://afnansadiq-testgenrag.hf.space/app)**.
+A single, self-contained web app (HTML + vanilla JS, no build step) with **three switchable themes** — same pipeline and API behind each. The app is **live now** at **[afnansadiq-testgenrag.hf.space/app](https://afnansadiq-testgenrag.hf.space/app)**.
 
 <div align="center">
 
@@ -64,7 +64,7 @@ A single, self-contained web app (HTML + vanilla JS, no build step) with **four 
 
 </div>
 
-> A Light theme, a Futuristic theme (the v1 design), and a live "tweaks" panel are included too. Switch themes from the toggle in the corner of the [live demo](https://afnansadiq-testgenrag.hf.space/app).
+> A light theme and a live "tweaks" panel are included too. Switch themes from the toggle in the corner of the [live demo](https://afnansadiq-testgenrag.hf.space/app).
 
 ---
 
@@ -168,7 +168,7 @@ flowchart TD
 
 | Layer | Technologies |
 |---|---|
-| **Frontend** | Self-contained HTML + vanilla JS (no build step) · responsive single-page UI · four themes (Windows 98 / dark / light / futuristic) · served directly by the API at `/app` |
+| **Frontend** | Self-contained HTML + vanilla JS (no build step) · responsive single-page UI · three themes (Windows 98 / dark / light) · served directly by the API at `/app` |
 | **Backend / AI** | Python · FastAPI · LangChain · LangGraph · RAG (HyDE, query selection, re-ranking, LLM-as-judge) · FAISS |
 | **PDF & data** | PyPDF · PDFPlumber · Docling · dynamic page classification |
 | **Models** | NVIDIA NIM (Llama, Mistral, Nemotron...) · Anthropic Claude · OpenAI · AWS Bedrock · Ollama (local) · sentence-transformers embeddings |
