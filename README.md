@@ -40,21 +40,27 @@ It is **model-agnostic** (Llama, Mistral, Claude, GPT, or fully local Ollama) an
 
 ## 📸 The interface
 
-A single, self-contained web app (HTML + vanilla JS, no build step) with **three switchable themes** — same pipeline and API behind each. The app is **live now** at **[afnansadiq-testgenrag.hf.space/app](https://afnansadiq-testgenrag.hf.space/app)**.
+One app, **three complete personalities.** TestGenRAG ships as a single self-contained page (HTML + vanilla JS, *no build step*), yet it swaps between three fully-realised themes instantly — pure CSS over the same DOM, no reload, no rebuild, and your choice is remembered between visits. The same agentic pipeline, the same API, three very different rooms to run it in. It's **live now** at **[afnansadiq-testgenrag.hf.space/app](https://afnansadiq-testgenrag.hf.space/app)** — switch themes from the panel in the bottom-left corner.
 
-<div align="center">
+### 🪟 Windows 98 — the signature look (default)
 
-**Modern (dark) theme** — the default clean look
+![TestGenRAG in Windows 98 theme: teal desktop, each section rendered as a 90s window with a purple gradient title bar, classic minimize/maximize/close buttons, beveled controls, and a Start-menu taskbar](docs/screenshots/win98.png)
 
-![TestGenRAG modern dark interface: NVIDIA key + model picker, Step 01 ingest, Step 02 requirement](docs/screenshots/modern.png)
+The one nobody expects. Each section of the app becomes a genuine **late-90s desktop window** — purple gradient title bars, the classic `– □ ✕` controls, chiselled 3D buttons, the teal void of an old CRT, even a working **Start menu, taskbar, and clock**. The title bars aren't a background image; they're injected live onto the real sections, so a serious RAG pipeline ends up wearing a perfectly nostalgic disguise. It's a memorable, conversation-starting front door that still does real work underneath.
 
-**Windows 98 mode** — a retro theme, draggable windows and all
+### 🌑 Dark — sleek and high-contrast
 
-![TestGenRAG Windows 98 themed interface with classic window chrome and taskbar](docs/screenshots/win98.png)
+![TestGenRAG in Dark theme: near-black canvas, giant ghosted 01 / 02 section numbers, bold condensed display type, and a single acid-lime accent on the primary action button](docs/screenshots/dark.png)
 
-</div>
+Editorial meets terminal. A near-black canvas, oversized **ghosted "01 / 02" section numerals**, and bold condensed display type (Syne) give it a confident, magazine-like rhythm. The whole palette is monochrome except for one disciplined pop of **acid-lime** (`#d4ff00`) reserved for the primary action — so your eye always knows where to go next. A soft cursor-following glow and fine grain texture make it feel alive without getting in the way.
 
-> A light theme and a live "tweaks" panel are included too. Switch themes from the toggle in the corner of the [live demo](https://afnansadiq-testgenrag.hf.space/app).
+### ☀️ Light — bright, airy, editorial
+
+![TestGenRAG in Light theme: clean white canvas with soft pastel section tints (lavender, cream), the same giant ghosted numbers, rounded cards and generous whitespace](docs/screenshots/light.png)
+
+The same strong typographic layout, reimagined for daylight. A clean white canvas with **soft pastel section tints** (lavender for ingest, warm cream for the requirement step), rounded cards, and generous whitespace make it calm and presentation-friendly — ideal for screen-sharing, demos, or anyone who simply prefers light mode. Even the copy adapts: a few helper lines rephrase themselves to suit the brighter, friendlier tone.
+
+> **What's special:** same code, zero rebuild — a retro-OS novelty, a high-contrast dark workspace, and a clean light reading mode all live in one file, switchable in a click and remembered for next time. A live "tweaks" panel (accent colour, section tints) is included too.
 
 ---
 
